@@ -8,4 +8,5 @@ public class PigLatin{
   public static String pigLatinBest(String s){
     return "";
   }
+  public static void main (String []args){}
 }
