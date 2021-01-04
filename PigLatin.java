@@ -1,9 +1,10 @@
+import java.util.*;
+import java.util.regex.Pattern;
 public class PigLatin{
-
   public static String pigLatinSimple(String s){
     String piggedsimple="";
       if (s.length()==0){
-        return "";
+        return s;
       }
       else{
         char c= s.charAt(0);
@@ -29,7 +30,7 @@ public class PigLatin{
       }
     }
     if(s.length()==0){
-      return "";
+      return s;
     }
     else{
       if (isthereDigraph){
@@ -43,18 +44,36 @@ public class PigLatin{
   }
 
   public static String pigLatinBest(String s){
-    return "";
+    String piggedBest ="";
+    if (s.length()==0 || Character.isLetter(s.charAt(0))==false){
+      return s;
+    }
+    else{
+      if (Pattern.matches("\\p{IsPunctuation}", s.substring(s.length()-1))){
+        piggedBest= pigLatin(s.substring(0,s.length()-1))+ s.charAt(s.length()-1);
+      }
+      else{
+        return pigLatin(s);
+      }
+    }
+    return piggedBest;
   }
   public static void main (String []args){
-  /*  System.out.println(pigLatinSimple("mock")); //→ "ockmay"
-    System.out.println(pigLatinSimple("pie")); //→ "iepay"
-    System.out.println(pigLatinSimple("david")); //→ "avidday"
-    System.out.println(pigLatinSimple("aaron")); //→ "aaronhay"
-    */
-    System.out.println(pigLatin("the")); //→ "ethay"
-    System.out.println(pigLatin("check")); //→ "eckchay"
-    System.out.println(pigLatin("skee")); //→ "eeskay"
-    System.out.println(pigLatin("emu")); //→ "emuhay"
-    System.out.println(pigLatin("grade")); //→ "adegray"
+    //use the standard input (terminal input)
+    //as the string that you read from
+    Scanner line = new Scanner( System.in );
+    //use hasNextLine()/nextLine() to loop over
+    //all of the data
+    //If you want to read the input word by word
+    //this can be replaced with hasNext() and next()
+    //do something with line
+    while(line.hasNextLine()){
+      Scanner word = new Scanner(line.nextLine());
+
+      while(word.hasNext()){
+        System.out.print(pigLatinBest(word.next())+" ");
+      }
+      System.out.println();
+    }
   }
 }
