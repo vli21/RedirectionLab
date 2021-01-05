@@ -1,8 +1,12 @@
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.Locale;
+
 public class PigLatin{
+
   public static String pigLatinSimple(String s){
     String piggedsimple="";
+    s=s.toLowerCase();
       if (s.length()==0){
         return s;
       }
@@ -19,13 +23,14 @@ public class PigLatin{
   }
 
   public static String pigLatin(String s){
+    s=s.toLowerCase();
     String [] Digraphs= {"bl", "br", "ch", "ck", "cl", "cr", "dr","fl", "fr", "gh",
                          "gl", "gr", "ng", "ph", "pl", "pr", "qu", "sc", "sh", "sk",
                          "sl", "sm", "sn", "sp", "st", "sw", "th", "tr", "tw", "wh", "wr"};
     boolean isthereDigraph= false;
     String pigged="";
     for (int i=0; i<Digraphs.length;i++){
-      if (s.substring(0,2).equals(Digraphs[i])){
+      if (s.length()>2 && s.substring(0,2).equals(Digraphs[i])){
         isthereDigraph=true;
       }
     }
@@ -44,6 +49,7 @@ public class PigLatin{
   }
 
   public static String pigLatinBest(String s){
+    s=s.toLowerCase();
     String piggedBest ="";
     if (s.length()==0 || Character.isLetter(s.charAt(0))==false){
       return s;
@@ -53,7 +59,7 @@ public class PigLatin{
         piggedBest= pigLatin(s.substring(0,s.length()-1))+ s.charAt(s.length()-1);
       }
       else{
-        return pigLatin(s);
+        piggedBest=pigLatin(s);
       }
     }
     return piggedBest;
