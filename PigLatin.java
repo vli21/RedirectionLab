@@ -74,12 +74,13 @@ public class PigLatin{
     //this can be replaced with hasNext() and next()
     //do something with line
     while(line.hasNextLine()){
+      String fixed="";
       Scanner word = new Scanner(line.nextLine());
-
       while(word.hasNext()){
-        System.out.print(pigLatinBest(word.next())+" ");
-      }
-      System.out.println();
+        fixed+= pigLatinBest(word.next());
+        fixed+=" ";
     }
+    System.out.println(fixed.substring(0,fixed.length()-1));
   }
+}
 }
